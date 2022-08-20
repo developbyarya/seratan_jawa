@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "197040451030",
+    "project_id": "seratanjawi",
+    "storage_bucket": "seratanjawi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:197040451030:android:20683f20f6a8f1b3a64877",
+        "android_client_info": {
+          "package_name": "com.developbyarya.seratanjawa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "197040451030-g692r31b1pa2n9cqnkibj0mklm78v296.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXHicPyX6Xfsl09bIcNz-JNuWs-NztcKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "197040451030-g692r31b1pa2n9cqnkibj0mklm78v296.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
