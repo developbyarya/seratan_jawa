@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:v1/components/KetikJawaban.dart';
 import 'package:v1/components/Materi.dart';
 import 'package:v1/components/Pilihan.dart';
 import 'package:v1/constant/Color.dart';
@@ -33,49 +34,50 @@ class Utama extends StatelessWidget {
             .get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
+            print(snapshot.data!.docs.length);
+
             PageController pageController = PageController();
+            var appBar2 = AppBar(
+              centerTitle: true,
+              leading: CloseButton(color: Colors.black),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+              title: Obx(() => ClipRRect(
+                    borderRadius: BorderRadius.all(Radius.circular(9999)),
+                    child: LinearProgressIndicator(
+                      value: _controller.progress / snapshot.data!.docs.length,
+                      minHeight: 15,
+                    ),
+                  )),
+              actions: [
+                Container(
+                  child: Obx(() => Text(
+                        "${_controller.progress}/${snapshot.data!.docs.length}",
+                        style: TextStyle(color: Colors.black),
+                      )),
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.only(right: 15),
+                )
+              ],
+            );
             return Scaffold(
-              appBar: AppBar(
-                centerTitle: true,
-                leading: CloseButton(color: Colors.black),
-                backgroundColor: Colors.transparent,
-                elevation: 0,
-                title: Obx(() => ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(9999)),
-                      child: LinearProgressIndicator(
-                        value: _controller.progress / totalBagian,
-                        minHeight: 15,
-                      ),
-                    )),
-                actions: [
-                  Container(
-                    child: Obx(() => Text(
-                          "${_controller.progress}/$totalBagian",
-                          style: TextStyle(color: Colors.black),
-                        )),
-                    alignment: Alignment.center,
-                    margin: EdgeInsets.only(right: 15),
-                  )
-                ],
-              ),
+              appBar: appBar2,
               body: PageView(
                 controller: pageController,
                 onPageChanged: (index) {
-                  if (index + 1 == totalBagian) {
+                  if (index + 1 == snapshot.data!.docs.length) {
                     print("yeay terakhir");
                     _controller.setLastPage();
                   }
                 },
                 children: snapshot.data!.docs.map((e) {
+                  print("disini woy");
                   Map<String, dynamic> soalResult =
                       e.data() as Map<String, dynamic>;
-                  print("hello");
+
                   if (soalResult["tipe"] == "materi") {
                     return Materi(
-                      aksara: soalResult["data"]["aksara"]
-                          .toString()
-                          .split("\\u")
-                          .sublist(1)[0],
+                      aksara: soalResult["data"]["aksara"].toString(),
                       latin: soalResult["data"]["latin"],
                       pageController: pageController,
                     );
@@ -91,6 +93,9 @@ class Utama extends StatelessWidget {
                         soalResult["data"]["kunciIndex"],
                         soalResult["data"]["option"],
                         pageController);
+                  } else if (soalResult["tipe"] == "ketik") {
+                    return KetikJawaban(
+                        appBar2.preferredSize.height, pageController);
                   }
 
                   return Text("Apalah gitu");

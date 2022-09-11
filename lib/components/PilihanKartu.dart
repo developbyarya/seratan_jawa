@@ -93,24 +93,26 @@ class PilihanKartu extends StatelessWidget {
           alignment: Alignment.center,
           child: Padding(
             padding: EdgeInsets.all(10),
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
-                  primary: ColorsConstant.primary,
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  minimumSize: Size(double.infinity, 50)),
-              child: Obx(
-                  () => Text(_controller.isLast.value ? "selesai" : "Lanjut")),
-              onPressed: () {
-                if (_controller.isLast.value) {
-                  Get.back();
-                }
-                _controller.increment();
-                _controller.resetAnswer();
-                pageController.nextPage(
-                    duration: Duration(milliseconds: 500), curve: Curves.ease);
-              },
-            ),
+            child: Obx(() => ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      shape: StadiumBorder(),
+                      primary: _controller.isAnswered.value
+                          ? ColorsConstant.primary
+                          : ColorsConstant.primaryInactive,
+                      padding: EdgeInsets.symmetric(vertical: 15),
+                      minimumSize: Size(double.infinity, 50)),
+                  child: Text(_controller.isLast.value ? "selesai" : "Lanjut"),
+                  onPressed: () {
+                    if (_controller.isLast.value) {
+                      Get.back();
+                    }
+                    _controller.increment();
+                    _controller.resetAnswer();
+                    pageController.nextPage(
+                        duration: Duration(milliseconds: 500),
+                        curve: Curves.ease);
+                  },
+                )),
           ),
         ),
       ],
