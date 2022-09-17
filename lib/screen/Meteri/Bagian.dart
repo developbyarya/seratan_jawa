@@ -57,7 +57,11 @@ class Bagian extends StatelessWidget {
                       },
                       child: Card(
                           child: Container(
-                        child: Text("Bagian ${e.toString()}"),
+                        child: Text(
+                          "Bagian ${e.toString()}",
+                          style: TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w600),
+                        ),
                         padding: EdgeInsets.only(top: 20, bottom: 20, left: 10),
                       )),
                     ),

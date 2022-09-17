@@ -3,6 +3,7 @@ import 'package:v1/components/Aksara.dart';
 import 'package:v1/constant/Color.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/Utama/Utama.dart';
+import 'package:v1/controller/components/Pilihan.dart';
 
 class Pilihan extends StatelessWidget {
   final String pertanyaan;
@@ -14,6 +15,7 @@ class Pilihan extends StatelessWidget {
       : super(key: key);
 
   var _controller = Get.find<UtamaController>();
+  var _selfController = Get.put(PilihanController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,12 +39,8 @@ class Pilihan extends StatelessWidget {
                 children: option.map((opsi) {
                   return InkWell(
                     onTap: () {
-                      if (!_controller.isAnswered.value) {
-                        if (opsi == option[kunci]) {
-                          _controller.setCorrect();
-                        }
-                        _controller.setAnswered();
-                      }
+                      _selfController.setPilihan(opsi);
+                      _controller.setAnswered();
                     },
                     child: Obx(() => Container(
                         child: TextAksara(
@@ -64,8 +62,12 @@ class Pilihan extends StatelessWidget {
                           border: Border.all(
                               width: 1,
                               color: _controller.isAnswered.value
-                                  ? _controller
-                                      .getColorState(opsi == option[kunci])
+                                  ? (_controller.allowNext.value
+                                      ? _controller
+                                          .getColorState(opsi == option[kunci])
+                                      : (_selfController.pilihan.value == opsi)
+                                          ? ColorsConstant.primary
+                                          : ColorsConstant.border)
                                   : ColorsConstant.border),
                           borderRadius: BorderRadius.circular(12),
                         ))),
@@ -73,33 +75,66 @@ class Pilihan extends StatelessWidget {
                 }).toList())
           ]),
         ),
-        Container(
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Padding(
-            padding: EdgeInsets.all(10),
-            child: Obx(() => ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      shape: StadiumBorder(),
-                      primary: _controller.isAnswered.value
-                          ? ColorsConstant.primary
-                          : ColorsConstant.primaryInactive,
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      minimumSize: Size(double.infinity, 50)),
-                  child: Text(_controller.isLast.value ? "selesai" : "Lanjut"),
-                  onPressed: () {
-                    if (_controller.isLast.value) {
-                      Get.back();
-                    }
-                    _controller.increment();
-                    _controller.resetAnswer();
-                    pageController.nextPage(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.ease);
-                  },
-                )),
-          ),
-        ),
+        Obx(() => Container(
+              width: double.infinity,
+              padding: EdgeInsets.only(top: 30),
+              color: _controller.allowNext.value
+                  ? ColorsConstant.primaryShade
+                  : Colors.transparent,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25),
+                    child: Text(
+                      _controller.allowNext.value
+                          ? (_controller.isCorrect.value ? "Benar" : "Salah")
+                          : "",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
+                          color: _controller.isCorrect.value
+                              ? ColorsConstant.sucess
+                              : ColorsConstant.error),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          shape: StadiumBorder(),
+                          primary: _controller.isAnswered.value
+                              ? ColorsConstant.primary
+                              : ColorsConstant.primaryInactive,
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          minimumSize: Size(double.infinity, 50)),
+                      child: Text(_controller.allowNext.value
+                          ? (_controller.isLast.value ? "selesai" : "Lanjut")
+                          : "check"),
+                      onPressed: () {
+                        if (!_controller.isAnswered.value) return;
+                        if (_controller.allowNext.value) {
+                          if (_controller.isLast.value) {
+                            Get.back();
+                          }
+                          _controller.increment();
+                          _controller.resetAnswer();
+                          pageController.nextPage(
+                              duration: Duration(milliseconds: 500),
+                              curve: Curves.ease);
+                        } else {
+                          _controller.allowNext.value = true;
+                          if (_selfController.pilihan.value == option[kunci])
+                            _controller.setCorrect();
+                        }
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            )),
       ],
     );
   }

@@ -95,7 +95,10 @@ class Utama extends StatelessWidget {
                         pageController);
                   } else if (soalResult["tipe"] == "ketik") {
                     return KetikJawaban(
-                        appBar2.preferredSize.height, pageController);
+                        soalResult["data"]["pertanyaan"],
+                        soalResult["data"]["kunci"],
+                        appBar2.preferredSize.height,
+                        pageController);
                   }
 
                   return Text("Apalah gitu");

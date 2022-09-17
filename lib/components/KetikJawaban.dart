@@ -8,7 +8,10 @@ import 'Aksara.dart';
 class KetikJawaban extends StatelessWidget {
   final PageController pageController;
   final double appBarHeight;
-  KetikJawaban(this.appBarHeight, this.pageController, {Key? key})
+  final pertanyaan, kunci;
+  KetikJawaban(
+      this.pertanyaan, this.kunci, this.appBarHeight, this.pageController,
+      {Key? key})
       : super(key: key);
 
   var _controller = Get.find<UtamaController>();
@@ -18,7 +21,7 @@ class KetikJawaban extends StatelessWidget {
     return SingleChildScrollView(
       child: ConstrainedBox(
         constraints: BoxConstraints(
-            maxHeight: MediaQuery.of(context).size.height - appBarHeight),
+            maxHeight: MediaQuery.of(context).size.height - appBarHeight - 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -35,7 +38,7 @@ class KetikJawaban extends StatelessWidget {
                     ),
                     child: Align(
                       child: TextAksara(
-                          String.fromCharCode(int.parse("A9A2", radix: 16)),
+                          String.fromCharCode(int.parse(pertanyaan, radix: 16)),
                           size: 72),
                       alignment: Alignment.center,
                     ),
@@ -52,7 +55,12 @@ class KetikJawaban extends StatelessWidget {
                   ),
                   TextField(
                     onChanged: (e) {
-                      _selfController.setJawaban(e);
+                      if (e == "") {
+                        _controller.removeAnswered();
+                      } else {
+                        _controller.setAnswered();
+                      }
+                      _selfController.setJawaban(e.toLowerCase());
                     },
                     decoration: InputDecoration(
                       hintText: "Ketik jawaban anda",
@@ -64,34 +72,72 @@ class KetikJawaban extends StatelessWidget {
                 ],
               ),
             ),
-            Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: Obx(() => ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
-                          primary: _controller.isAnswered.value
-                              ? ColorsConstant.primary
-                              : ColorsConstant.primaryInactive,
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          minimumSize: Size(double.infinity, 50)),
-                      child:
-                          Text(_controller.isLast.value ? "selesai" : "Lanjut"),
-                      onPressed: () {
-                        if (_controller.isLast.value) {
-                          Get.back();
-                        }
-                        _controller.increment();
-                        _controller.resetAnswer();
-                        pageController.nextPage(
-                            duration: Duration(milliseconds: 500),
-                            curve: Curves.ease);
-                      },
-                    )),
-              ),
-            ),
+            Obx(() => Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.only(top: 30),
+                  color: _controller.allowNext.value
+                      ? ColorsConstant.primaryShade
+                      : Colors.transparent,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 25),
+                        child: Text(
+                          _controller.allowNext.value
+                              ? (_controller.isCorrect.value
+                                  ? "Benar"
+                                  : "Salah")
+                              : "",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: _controller.isCorrect.value
+                                  ? ColorsConstant.sucess
+                                  : ColorsConstant.error),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(10),
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              shape: StadiumBorder(),
+                              primary: _controller.isAnswered.value
+                                  ? ColorsConstant.primary
+                                  : ColorsConstant.primaryInactive,
+                              padding: EdgeInsets.symmetric(vertical: 15),
+                              minimumSize: Size(double.infinity, 50)),
+                          child: Text(_controller.allowNext.value
+                              ? (_controller.isLast.value
+                                  ? "selesai"
+                                  : "Lanjut")
+                              : "check"),
+                          onPressed: () {
+                            if (!_controller.isAnswered.value) return;
+                            if (_controller.allowNext.value) {
+                              if (_controller.isLast.value) {
+                                Get.back();
+                              }
+                              _controller.increment();
+                              _controller.resetAnswer();
+                              pageController.nextPage(
+                                  duration: Duration(milliseconds: 500),
+                                  curve: Curves.ease);
+                            } else {
+                              if (kunci == _selfController.jawaban.value) {
+                                _controller.setCorrect();
+                              }
+                              _controller.setAnswered();
+                              _controller.allowNext.toggle();
+                            }
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                )),
           ],
         ),
       ),
