@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:v1/components/Hari.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/home/Home.dart';
+import 'package:connectivity/connectivity.dart';
 
 class Home extends StatelessWidget {
   Home({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class Home extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
               margin: EdgeInsets.only(top: 40, left: 10),
@@ -39,35 +40,65 @@ class Home extends StatelessWidget {
                   fontSize: 20,
                 ),
               ),
+              alignment: Alignment.topLeft,
             ),
             SizedBox(
               height: 50,
             ),
-            FutureBuilder<QuerySnapshot>(
-                future: soal.get(),
+            StreamBuilder(
+                stream: Connectivity().onConnectivityChanged,
                 builder: (context, snapshot) {
-                  if (snapshot.hasError) {
-                    return const Text(
-                        "Something Went Error! please try again later!");
+                  switch (snapshot.data) {
+                    case ConnectivityResult.none:
+                      return Text("No Internet Connection!");
+                    case ConnectivityResult.wifi:
+                    case ConnectivityResult.mobile:
+                      return ProgramHari(soal: soal);
+                    default:
+                      return Text("No Internet Connection!");
                   }
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    return Column(
-                        children: snapshot.data!.docs.map((e) {
-                      Map<String, dynamic> data =
-                          e.data() as Map<String, dynamic>;
-                      return Hari(
-                          hari: data["ke"],
-                          progrss: 0,
-                          totalBagian: data["chapter"],
-                          id: e.id,
-                          bagianDesc: data["deskripsi"]);
-                    }).toList());
-                  }
-                  return const CircularProgressIndicator();
                 }),
           ],
         ),
       ),
     );
+  }
+}
+
+class ProgramHari extends StatelessWidget {
+  const ProgramHari({
+    Key? key,
+    required this.soal,
+  }) : super(key: key);
+
+  final CollectionReference<Map<String, dynamic>> soal;
+
+  @override
+  Widget build(BuildContext context) {
+    return FutureBuilder<QuerySnapshot>(
+        future: soal.get(),
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Text("Something Went Error! please try again later!");
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Column(
+                children: snapshot.data!.docs.map((e) {
+              Map<String, dynamic> data = e.data() as Map<String, dynamic>;
+              return Hari(
+                  hari: data["ke"],
+                  progrss: 0,
+                  totalBagian: data["chapter"],
+                  id: e.id,
+                  bagianDesc: data["deskripsi"]);
+            }).toList());
+          }
+          return Container(
+            child: const Center(child: CircularProgressIndicator()),
+            width: 200,
+            height: 200,
+            alignment: Alignment.center,
+          );
+        });
   }
 }

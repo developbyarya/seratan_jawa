@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:v1/components/Cocok.dart';
 import 'package:v1/components/KetikJawaban.dart';
 import 'package:v1/components/Materi.dart';
 import 'package:v1/components/Pilihan.dart';
@@ -34,8 +35,12 @@ class Utama extends StatelessWidget {
             .get(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            print(snapshot.data!.docs.length);
-
+            if (snapshot.data!.docs.length == 0) {
+              return Scaffold(
+                body: SafeArea(
+                    child: Text("Terjadi Error, periksa koneksi anda!")),
+              );
+            }
             PageController pageController = PageController();
             var appBar2 = AppBar(
               centerTitle: true,
@@ -99,6 +104,12 @@ class Utama extends StatelessWidget {
                         soalResult["data"]["kunci"],
                         appBar2.preferredSize.height,
                         pageController);
+                  } else if (soalResult["tipe"] == "cocok") {
+                    return Cocok(
+                        (soalResult["data"]["left"]),
+                        (soalResult["data"]["right"]),
+                        (soalResult["data"]["kunci"]),
+                        pageController);
                   }
 
                   return Text("Apalah gitu");
@@ -108,8 +119,7 @@ class Utama extends StatelessWidget {
             );
           }
 
-          return Scaffold(
-              backgroundColor: Colors.brown, body: CircularProgressIndicator());
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
         });
   }
 
