@@ -41,9 +41,7 @@ class Materi extends StatelessWidget {
               child: Stack(
                 children: [
                   Align(
-                    child: Aksara(
-                        String.fromCharCode(int.parse(aksara, radix: 16)),
-                        size: 96),
+                    child: Aksara(aksara, size: 96),
                     alignment: Alignment.center,
                   ),
                   Padding(

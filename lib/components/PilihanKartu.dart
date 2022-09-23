@@ -32,9 +32,7 @@ class PilihanKartu extends StatelessWidget {
               child: Stack(
                 children: [
                   Align(
-                    child: TextAksara(
-                        String.fromCharCode(int.parse(pertanyaan, radix: 16)),
-                        size: 72),
+                    child: TextAksara(pertanyaan, size: 72),
                     alignment: Alignment.center,
                   ),
                 ],

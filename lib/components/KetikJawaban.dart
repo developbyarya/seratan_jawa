@@ -37,9 +37,7 @@ class KetikJawaban extends StatelessWidget {
                       color: ColorsConstant.primary,
                     ),
                     child: Align(
-                      child: TextAksara(
-                          String.fromCharCode(int.parse(pertanyaan, radix: 16)),
-                          size: 72),
+                      child: TextAksara(pertanyaan, size: 72),
                       alignment: Alignment.center,
                     ),
                   ),
@@ -88,7 +86,7 @@ class KetikJawaban extends StatelessWidget {
                           _controller.allowNext.value
                               ? (_controller.isCorrect.value
                                   ? "Benar"
-                                  : "Salah")
+                                  : "Salah \n Jawaban: $kunci")
                               : "",
                           textAlign: TextAlign.left,
                           style: TextStyle(

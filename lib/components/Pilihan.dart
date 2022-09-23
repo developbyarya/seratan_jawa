@@ -44,7 +44,7 @@ class Pilihan extends StatelessWidget {
                     },
                     child: Obx(() => Container(
                         child: TextAksara(
-                          String.fromCharCode(int.parse(opsi, radix: 16)),
+                          opsi,
                           size: 42,
                           color: Colors.black,
                         ),

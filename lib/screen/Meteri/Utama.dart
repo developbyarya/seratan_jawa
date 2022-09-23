@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:v1/components/Cocok.dart';
 import 'package:v1/components/KetikJawaban.dart';
 import 'package:v1/components/Materi.dart';
+import 'package:v1/components/Multiaksara.dart';
 import 'package:v1/components/Pilihan.dart';
+import 'package:v1/components/Latin.dart';
 import 'package:v1/constant/Color.dart';
 import 'package:v1/controller/Utama/Utama.dart';
 import 'package:v1/screen/Meteri/Bagian.dart';
@@ -109,6 +111,18 @@ class Utama extends StatelessWidget {
                         (soalResult["data"]["left"]),
                         (soalResult["data"]["right"]),
                         (soalResult["data"]["kunci"]),
+                        pageController);
+                  } else if (soalResult["tipe"] == "multiaksara") {
+                    return Multiaksara(
+                        soalResult["data"]["pertanyaan"],
+                        soalResult["data"]["option"],
+                        soalResult["data"]["kunciIndex"],
+                        pageController);
+                  } else if (soalResult["tipe"] == "pertanyaan-latin") {
+                    return PertanyaanLatin(
+                        soalResult["data"]["pertanyaan"],
+                        soalResult["data"]["option"],
+                        soalResult["data"]["kunciIndex"],
                         pageController);
                   }
 

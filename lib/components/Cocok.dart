@@ -94,8 +94,7 @@ class Cocok extends StatelessWidget {
                         .map((e) => InkWell(
                               child: Obx(() => Container(
                                   child: TextAksara(
-                                    String.fromCharCode(
-                                        int.parse(e, radix: 16)),
+                                    e,
                                     color: _selfController.correct.contains(
                                             kunci.indexOf(right.indexOf(e)))
                                         ? ColorsConstant.border
