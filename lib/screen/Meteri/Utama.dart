@@ -90,16 +90,20 @@ class Utama extends StatelessWidget {
                     );
                   } else if (soalResult["tipe"] == "pilihan") {
                     return Pilihan(
-                        soalResult["data"]["pertanyaan"],
-                        soalResult["data"]["kunciIndex"],
-                        soalResult["data"]["option"],
-                        pageController);
+                      soalResult["data"]["pertanyaan"],
+                      soalResult["data"]["kunciIndex"],
+                      soalResult["data"]["option"],
+                      pageController,
+                      massage: soalResult["data"]["massage"],
+                    );
                   } else if (soalResult["tipe"] == "pilihan_kartu") {
                     return PilihanKartu(
-                        soalResult["data"]["pertanyaan"],
-                        soalResult["data"]["kunciIndex"],
-                        soalResult["data"]["option"],
-                        pageController);
+                      soalResult["data"]["pertanyaan"],
+                      soalResult["data"]["kunciIndex"],
+                      soalResult["data"]["option"],
+                      pageController,
+                      massage: soalResult["data"]["massage"],
+                    );
                   } else if (soalResult["tipe"] == "ketik") {
                     return KetikJawaban(
                         soalResult["data"]["pertanyaan"],
@@ -114,16 +118,20 @@ class Utama extends StatelessWidget {
                         pageController);
                   } else if (soalResult["tipe"] == "multiaksara") {
                     return Multiaksara(
-                        soalResult["data"]["pertanyaan"],
-                        soalResult["data"]["option"],
-                        soalResult["data"]["kunciIndex"],
-                        pageController);
+                      soalResult["data"]["pertanyaan"],
+                      soalResult["data"]["option"],
+                      soalResult["data"]["kunciIndex"],
+                      pageController,
+                      massage: soalResult["data"]["massage"],
+                    );
                   } else if (soalResult["tipe"] == "pertanyaan-latin") {
                     return PertanyaanLatin(
-                        soalResult["data"]["pertanyaan"],
-                        soalResult["data"]["option"],
-                        soalResult["data"]["kunciIndex"],
-                        pageController);
+                      soalResult["data"]["pertanyaan"],
+                      soalResult["data"]["option"],
+                      soalResult["data"]["kunciIndex"],
+                      pageController,
+                      massage: soalResult["data"]["massage"],
+                    );
                   } else if (soalResult["tipe"] == "text") {
                     return MateriText(soalResult["data"]["title"],
                         soalResult["data"]["text"], pageController);

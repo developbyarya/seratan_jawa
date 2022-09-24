@@ -12,7 +12,7 @@ class Pilihan extends StatelessWidget {
   final PageController pageController;
   String? massage;
   Pilihan(this.pertanyaan, this.kunci, this.option, this.pageController,
-      {Key? key, String? massage})
+      {Key? key, this.massage})
       : super(key: key);
   var _controller = Get.find<UtamaController>();
   var _selfController = Get.put(PilihanController());
@@ -104,7 +104,7 @@ class Pilihan extends StatelessWidget {
                                   : ColorsConstant.error),
                         ),
                         Text(
-                          massage ?? "",
+                          _controller.allowNext.value ? (massage ?? "") : "",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 16,

@@ -10,8 +10,9 @@ class PertanyaanLatin extends StatelessWidget {
   final List<dynamic> option;
   final int kunci;
   final PageController pageController;
+  String? massage;
   PertanyaanLatin(this.pertanyaan, this.option, this.kunci, this.pageController,
-      {Key? key})
+      {Key? key, this.massage})
       : super(key: key);
   final _controller = Get.find<UtamaController>();
   final _selfController = Get.put(MultiaksaraController());
@@ -100,18 +101,33 @@ class PertanyaanLatin extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 25),
-                    child: Text(
-                      _controller.allowNext.value
-                          ? (_controller.isCorrect.value ? "Benar" : "Salah ")
-                          : "",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: _controller.isCorrect.value
-                              ? ColorsConstant.sucess
-                              : ColorsConstant.error),
-                    ),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            _controller.allowNext.value
+                                ? (_controller.isCorrect.value
+                                    ? "Benar"
+                                    : "Salah")
+                                : "",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w700,
+                                color: _controller.isCorrect.value
+                                    ? ColorsConstant.sucess
+                                    : ColorsConstant.error),
+                          ),
+                          Text(
+                            _controller.allowNext.value ? (massage ?? "") : "",
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                                fontSize: 16,
+                                color: _controller.isCorrect.value
+                                    ? ColorsConstant.sucess
+                                    : ColorsConstant.error),
+                          )
+                        ]),
                   ),
                   Padding(
                     padding: EdgeInsets.all(10),

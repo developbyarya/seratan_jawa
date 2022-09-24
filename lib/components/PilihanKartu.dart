@@ -13,7 +13,7 @@ class PilihanKartu extends StatelessWidget {
   String? massage;
 
   PilihanKartu(this.pertanyaan, this.kunci, this.option, this.pageController,
-      {Key? key, String? massage})
+      {Key? key, this.massage})
       : super(key: key);
 
   var _controller = Get.find<UtamaController>();
@@ -102,6 +102,7 @@ class PilihanKartu extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 25),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           _controller.allowNext.value
@@ -118,7 +119,7 @@ class PilihanKartu extends StatelessWidget {
                                   : ColorsConstant.error),
                         ),
                         Text(
-                          massage ?? "",
+                          _controller.allowNext.value ? massage ?? "" : "",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 16,
