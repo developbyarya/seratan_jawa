@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:v1/components/Cocok.dart';
 import 'package:v1/components/KetikJawaban.dart';
 import 'package:v1/components/Materi.dart';
+import 'package:v1/components/MateriText.dart';
 import 'package:v1/components/Multiaksara.dart';
 import 'package:v1/components/Pilihan.dart';
 import 'package:v1/components/Latin.dart';
@@ -123,6 +124,9 @@ class Utama extends StatelessWidget {
                         soalResult["data"]["option"],
                         soalResult["data"]["kunciIndex"],
                         pageController);
+                  } else if (soalResult["tipe"] == "text") {
+                    return MateriText(soalResult["data"]["title"],
+                        soalResult["data"]["text"], pageController);
                   }
 
                   return Text("Apalah gitu");
