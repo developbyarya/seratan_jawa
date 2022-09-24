@@ -10,10 +10,10 @@ class Pilihan extends StatelessWidget {
   final int kunci;
   final List<dynamic> option;
   final PageController pageController;
+  String? massage;
   Pilihan(this.pertanyaan, this.kunci, this.option, this.pageController,
-      {Key? key})
+      {Key? key, String? massage})
       : super(key: key);
-
   var _controller = Get.find<UtamaController>();
   var _selfController = Get.put(PilihanController());
 
@@ -87,17 +87,32 @@ class Pilihan extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 25),
-                    child: Text(
-                      _controller.allowNext.value
-                          ? (_controller.isCorrect.value ? "Benar" : "Salah")
-                          : "",
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          color: _controller.isCorrect.value
-                              ? ColorsConstant.sucess
-                              : ColorsConstant.error),
+                    child: Column(
+                      children: [
+                        Text(
+                          _controller.allowNext.value
+                              ? (_controller.isCorrect.value
+                                  ? "Benar"
+                                  : "Salah")
+                              : "",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                              color: _controller.isCorrect.value
+                                  ? ColorsConstant.sucess
+                                  : ColorsConstant.error),
+                        ),
+                        Text(
+                          massage ?? "",
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: _controller.isCorrect.value
+                                  ? ColorsConstant.sucess
+                                  : ColorsConstant.error),
+                        )
+                      ],
                     ),
                   ),
                   Padding(
