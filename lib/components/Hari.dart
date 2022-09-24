@@ -73,7 +73,10 @@ class Hari extends StatelessWidget {
           style: TextStyle(
             fontSize: 18,
           ),
-        )
+        ),
+        SizedBox(
+          height: 30,
+        ),
       ],
     );
   }
