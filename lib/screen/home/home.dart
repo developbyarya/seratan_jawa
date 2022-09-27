@@ -82,7 +82,7 @@ class ProgramHari extends StatelessWidget {
             return const Text("Something Went Error! please try again later!");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            return Column(
+            return ListView(
                 children: snapshot.data!.docs.map((e) {
               Map<String, dynamic> data = e.data() as Map<String, dynamic>;
               return Hari(

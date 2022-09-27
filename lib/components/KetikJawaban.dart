@@ -124,7 +124,8 @@ class KetikJawaban extends StatelessWidget {
                                   duration: Duration(milliseconds: 500),
                                   curve: Curves.ease);
                             } else {
-                              if (kunci == _selfController.jawaban.value) {
+                              if (kunci.toString().trim() ==
+                                  _selfController.jawaban.value) {
                                 _controller.setCorrect();
                               }
                               _controller.setAnswered();

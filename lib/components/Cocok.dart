@@ -11,7 +11,9 @@ class Cocok extends StatelessWidget {
   final List<dynamic> right;
   final List<dynamic> kunci;
   final PageController pageController;
-  Cocok(this.left, this.right, this.kunci, this.pageController, {Key? key})
+  String? massage;
+  Cocok(this.left, this.right, this.kunci, this.pageController,
+      {Key? key, this.massage})
       : super(key: key);
 
   var _controller = Get.find<UtamaController>();
@@ -173,7 +175,7 @@ class Cocok extends StatelessWidget {
                             child: Text(
                               _controller.allowNext.value
                                   ? (_controller.isCorrect.value
-                                      ? "Benar"
+                                      ? "Benar $massage"
                                       : "Salah")
                                   : "",
                               textAlign: TextAlign.left,
