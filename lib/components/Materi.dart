@@ -41,7 +41,10 @@ class Materi extends StatelessWidget {
               child: Stack(
                 children: [
                   Align(
-                    child: Aksara(aksara, size: 96),
+                    child: FittedBox(
+                      child: Aksara(aksara, size: 72),
+                      fit: BoxFit.fitWidth,
+                    ),
                     alignment: Alignment.center,
                   ),
                   Padding(

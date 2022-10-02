@@ -21,6 +21,7 @@ class Cocok extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    _selfController.resetEverything();
     return Padding(
       padding: const EdgeInsets.only(top: 40),
       child: Column(
@@ -61,14 +62,15 @@ class Cocok extends StatelessWidget {
                             child: Text(
                               e,
                               style: TextStyle(
+                                  fontSize: 18,
                                   color: _selfController.correct
                                           .contains(left.indexOf(e))
                                       ? ColorsConstant.border
                                       : Colors.black),
                             ),
                             alignment: Alignment.center,
-                            width: 140,
-                            height: 70,
+                            width: 160,
+                            height: 80,
                             decoration: BoxDecoration(
                               color: Colors.white,
                               boxShadow: [
@@ -105,8 +107,8 @@ class Cocok extends StatelessWidget {
                                   ),
                                   margin: EdgeInsets.symmetric(vertical: 10),
                                   alignment: Alignment.center,
-                                  width: 140,
-                                  height: 70,
+                                  width: 160,
+                                  height: 80,
                                   decoration: BoxDecoration(
                                     color: Colors.white,
                                     boxShadow: [
@@ -163,7 +165,7 @@ class Cocok extends StatelessWidget {
                       color: _controller.allowNext.value
                           ? ColorsConstant.primaryShade
                           : Colors.transparent,
-                      height: 120,
+                      height: 180,
                       width: double.infinity,
                       alignment: Alignment.topCenter,
                       child: Column(
@@ -171,11 +173,11 @@ class Cocok extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 25),
+                            padding: const EdgeInsets.only(left: 25, top: 30),
                             child: Text(
                               _controller.allowNext.value
                                   ? (_controller.isCorrect.value
-                                      ? "Benar $massage"
+                                      ? "Benar \n ${massage ?? ""}"
                                       : "Salah")
                                   : "",
                               textAlign: TextAlign.left,
@@ -205,7 +207,9 @@ class Cocok extends StatelessWidget {
                                           : "Lanjut")
                                       : "check"),
                               onPressed: () {
-                                if (_controller.allowNext.value) {
+                                if (_controller.allowNext.value ||
+                                    _selfController.correct.length ==
+                                        kunci.length) {
                                   if (_controller.isLast.value) {
                                     Get.back();
                                   }

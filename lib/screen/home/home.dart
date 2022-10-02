@@ -43,7 +43,7 @@ class Home extends StatelessWidget {
               alignment: Alignment.topLeft,
             ),
             SizedBox(
-              height: 50,
+              height: 10,
             ),
             StreamBuilder(
                 stream: Connectivity().onConnectivityChanged,
@@ -82,16 +82,22 @@ class ProgramHari extends StatelessWidget {
             return const Text("Something Went Error! please try again later!");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            return ListView(
-                children: snapshot.data!.docs.map((e) {
-              Map<String, dynamic> data = e.data() as Map<String, dynamic>;
-              return Hari(
-                  hari: data["ke"],
-                  progrss: 0,
-                  totalBagian: data["chapter"],
-                  id: e.id,
-                  bagianDesc: data["deskripsi"]);
-            }).toList());
+            return Expanded(
+              child: ListView(children: [
+                SizedBox(
+                  height: 30,
+                ),
+                ...snapshot.data!.docs.map((e) {
+                  Map<String, dynamic> data = e.data() as Map<String, dynamic>;
+                  return Hari(
+                      hari: data["ke"],
+                      progrss: 0,
+                      totalBagian: data["chapter"],
+                      id: e.id,
+                      bagianDesc: data["deskripsi"]);
+                }).toList()
+              ]),
+            );
           }
           return Container(
             child: const Center(child: CircularProgressIndicator()),

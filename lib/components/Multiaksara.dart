@@ -4,6 +4,7 @@ import 'package:v1/constant/Color.dart';
 import 'package:v1/controller/Utama/Utama.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/components/Multiaksara.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class Multiaksara extends StatelessWidget {
   final String pertanyaan;
@@ -30,10 +31,12 @@ class Multiaksara extends StatelessWidget {
                 "Terjemahkan",
                 style: TextStyle(fontSize: 18),
               ),
-              TextAksara(
+              AutoSizeText(
                 pertanyaan,
-                size: 64,
-                color: Colors.black,
+                minFontSize: 36,
+                maxLines: 1,
+                style: const TextStyle(
+                    color: Colors.black, fontFamily: 'AksaraJawa'),
               ),
               Container(
                 child: Column(

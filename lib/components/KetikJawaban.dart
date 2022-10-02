@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/Utama/Utama.dart';
@@ -37,7 +38,13 @@ class KetikJawaban extends StatelessWidget {
                       color: ColorsConstant.primary,
                     ),
                     child: Align(
-                      child: TextAksara(pertanyaan, size: 72),
+                      child: AutoSizeText(
+                        pertanyaan,
+                        maxFontSize: 72,
+                        minFontSize: 56,
+                        style: const TextStyle(
+                            fontFamily: 'AksaraJawa', color: Colors.white),
+                      ),
                       alignment: Alignment.center,
                     ),
                   ),
@@ -58,7 +65,7 @@ class KetikJawaban extends StatelessWidget {
                       } else {
                         _controller.setAnswered();
                       }
-                      _selfController.setJawaban(e.toLowerCase());
+                      _selfController.setJawaban(e.trim().toLowerCase());
                     },
                     decoration: InputDecoration(
                       hintText: "Ketik jawaban anda",
