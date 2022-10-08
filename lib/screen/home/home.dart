@@ -27,6 +27,15 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Image.asset(
+          "assets/Logos.png",
+          height: 50,
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+      ),
       body: SafeArea(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -36,14 +45,11 @@ class Home extends StatelessWidget {
               child: Text(
                 "Sugeng, ${getSapaan()}\n",
                 style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w700,
                   fontSize: 20,
                 ),
               ),
               alignment: Alignment.topLeft,
-            ),
-            SizedBox(
-              height: 10,
             ),
             StreamBuilder(
                 stream: Connectivity().onConnectivityChanged,

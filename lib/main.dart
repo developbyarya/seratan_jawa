@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:v1/screen/onboarding/welcome.dart';
 // Screen
 import './screen/home/home.dart';
 import './screen/home/splash.dart';
@@ -30,10 +31,10 @@ class _StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: Future.delayed(Duration(seconds: 0)),
+      future: Future.delayed(Duration(seconds: 5)),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return SplashScreen();
+          return WelcomeScreen();
         }
         return Home();
       },
