@@ -18,7 +18,7 @@ class MateriText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          padding: EdgeInsets.only(top: 50, left: 20, right: 20),
           child: Column(
             children: [
               Text(
@@ -27,7 +27,7 @@ class MateriText extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
               TextAksara(
                 text.replaceAll("\\n", "\n"),
