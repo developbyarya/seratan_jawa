@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:v1/components/Aksara.dart';
 import 'package:v1/controller/Utama/Utama.dart';
 import 'package:v1/controller/components/Cocok.dart';
+import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 
 import '../constant/Color.dart';
 
@@ -211,6 +212,8 @@ class Cocok extends StatelessWidget {
                                     _selfController.correct.length ==
                                         kunci.length) {
                                   if (_controller.isLast.value) {
+                                    UserProgress.setProgress(
+                                        _controller.id, _controller.bagian);
                                     Get.back();
                                   }
                                   _controller.increment();

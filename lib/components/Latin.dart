@@ -5,6 +5,8 @@ import 'package:v1/controller/Utama/Utama.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/components/Multiaksara.dart';
 
+import '../utils/lib/storeage_control/user_progress.dart';
+
 class PertanyaanLatin extends StatelessWidget {
   final String pertanyaan;
   final List<dynamic> option;
@@ -146,6 +148,8 @@ class PertanyaanLatin extends StatelessWidget {
                         if (!_controller.isAnswered.value) return;
                         if (_controller.allowNext.value) {
                           if (_controller.isLast.value) {
+                            UserProgress.setProgress(
+                                _controller.id, _controller.bagian);
                             Get.back();
                           }
                           _controller.increment();

@@ -7,11 +7,14 @@ class UtamaController extends GetxController {
   var isCorrect = false.obs;
   var isAnswered = false.obs;
   var allowNext = false.obs;
+  var id;
+  var bagian;
   increment() => progress++;
   setLastPage() => isLast.value = true;
   setCorrect() => isCorrect.value = true;
   setAnswered() => isAnswered.value = true;
   removeAnswered() => isAnswered.value = false;
+
   resetAnswer() {
     isCorrect.value = false;
     isAnswered.value = false;

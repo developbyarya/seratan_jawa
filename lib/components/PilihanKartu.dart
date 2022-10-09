@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:v1/components/Aksara.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/components/Pilihan.dart';
+import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 import '../constant/Color.dart';
 import '../controller/Utama/Utama.dart';
 
@@ -147,6 +148,8 @@ class PilihanKartu extends StatelessWidget {
                         if (!_controller.isAnswered.value) return;
                         if (_controller.allowNext.value) {
                           if (_controller.isLast.value) {
+                            UserProgress.setProgress(
+                                _controller.id, _controller.bagian);
                             Get.back();
                           }
                           _controller.increment();

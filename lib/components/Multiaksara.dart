@@ -5,6 +5,7 @@ import 'package:v1/controller/Utama/Utama.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/components/Multiaksara.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 
 class Multiaksara extends StatelessWidget {
   final String pertanyaan;
@@ -147,6 +148,8 @@ class Multiaksara extends StatelessWidget {
                         if (!_controller.isAnswered.value) return;
                         if (_controller.allowNext.value) {
                           if (_controller.isLast.value) {
+                            UserProgress.setProgress(
+                                _controller.id, _controller.bagian);
                             Get.back();
                           }
                           _controller.increment();

@@ -29,6 +29,8 @@ class Utama extends StatelessWidget {
   final _controller = Get.put(UtamaController());
   @override
   Widget build(BuildContext context) {
+    _controller.id = id;
+    _controller.bagian = bagian;
     return FutureBuilder<QuerySnapshot>(
         future: FirebaseFirestore.instance
             .collection("soal")

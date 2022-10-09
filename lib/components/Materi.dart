@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:v1/constant/Color.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/Utama/Utama.dart';
+import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 
 class Materi extends StatelessWidget {
   final String aksara;
@@ -78,6 +79,8 @@ class Materi extends StatelessWidget {
                     Text(_controller.isLast.value ? "selesai" : "Lanjut")),
                 onPressed: () {
                   if (_controller.isLast.value) {
+                    UserProgress.setProgress(
+                        _controller.id, _controller.bagian);
                     Get.back();
                   }
                   _controller.increment();

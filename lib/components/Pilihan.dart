@@ -4,6 +4,7 @@ import 'package:v1/constant/Color.dart';
 import 'package:get/get.dart';
 import 'package:v1/controller/Utama/Utama.dart';
 import 'package:v1/controller/components/Pilihan.dart';
+import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 
 class Pilihan extends StatelessWidget {
   final String pertanyaan;
@@ -132,6 +133,8 @@ class Pilihan extends StatelessWidget {
                         if (!_controller.isAnswered.value) return;
                         if (_controller.allowNext.value) {
                           if (_controller.isLast.value) {
+                            UserProgress.setProgress(
+                                _controller.id, _controller.bagian);
                             Get.back();
                           }
                           _controller.increment();
