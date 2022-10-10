@@ -37,21 +37,21 @@ class _BagianState extends State<Bagian> {
             child: Text(
               "Program hari ke-${widget.hari}",
               textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 30,
           ),
           Text(
             (widget.bagianDesc),
             style: const TextStyle(fontSize: 16),
           ),
-          SizedBox(
+          const SizedBox(
             height: 15,
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Column(
               children: List.generate(widget.totalBagian, (index) => index + 1)
                   .map((e) => FutureBuilder<bool>(
@@ -59,7 +59,7 @@ class _BagianState extends State<Bagian> {
                           widget.id, "bagian${e.toString()}"),
                       builder: (context, snapshot) {
                         return Container(
-                          margin: EdgeInsets.only(bottom: 5),
+                          margin: const EdgeInsets.only(bottom: 5),
                           child: ListTile(
                             onTap: () {
                               Get.to(() => Utama(

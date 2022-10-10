@@ -18,15 +18,16 @@ class MateriText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 50, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 50, left: 20, right: 20),
           child: Column(
             children: [
               Text(
                 title,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               TextAksara(
@@ -41,13 +42,13 @@ class MateriText extends StatelessWidget {
           width: double.infinity,
           alignment: Alignment.center,
           child: Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
-                  shape: StadiumBorder(),
+                  shape: const StadiumBorder(),
                   primary: ColorsConstant.primary,
-                  padding: EdgeInsets.symmetric(vertical: 15),
-                  minimumSize: Size(double.infinity, 50)),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  minimumSize: const Size(double.infinity, 50)),
               child: Obx(
                   () => Text(_controller.isLast.value ? "selesai" : "Lanjut")),
               onPressed: () {
@@ -58,7 +59,8 @@ class MateriText extends StatelessWidget {
                 _controller.increment();
                 _controller.resetAnswer();
                 pageController.nextPage(
-                    duration: Duration(milliseconds: 500), curve: Curves.ease);
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.ease);
               },
             ),
           ),

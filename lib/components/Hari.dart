@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:v1/constant/Color.dart';
 import 'package:get/get.dart';
 import 'package:v1/screen/Meteri/Bagian.dart';
+import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 
 class Hari extends StatelessWidget {
   final String hari;
-  final double progrss;
   final int totalBagian;
   final String bagianDesc;
   final String id;
   const Hari(
       {Key? key,
       required this.hari,
-      required this.progrss,
       required this.totalBagian,
       required this.id,
       required this.bagianDesc})
@@ -28,18 +27,22 @@ class Hari extends StatelessWidget {
           },
           child: Stack(
             children: [
-              Center(
-                child: SizedBox(
-                  width: 120,
-                  height: 120,
-                  child: CircularProgressIndicator(
-                    value: progrss,
-                    color: ColorsConstant.primary,
-                    backgroundColor: ColorsConstant.primaryShade,
-                    strokeWidth: 10,
-                  ),
-                ),
-              ),
+              FutureBuilder<double>(
+                  future: UserProgress.getAllProgress(id, totalBagian),
+                  builder: (context, snapshot) {
+                    return Center(
+                      child: SizedBox(
+                        width: 120,
+                        height: 120,
+                        child: CircularProgressIndicator(
+                          value: snapshot.data,
+                          color: ColorsConstant.primary,
+                          backgroundColor: ColorsConstant.primaryShade,
+                          strokeWidth: 10,
+                        ),
+                      ),
+                    );
+                  }),
               Container(
                 width: 100,
                 alignment: Alignment.center,
@@ -65,16 +68,16 @@ class Hari extends StatelessWidget {
             alignment: Alignment.center,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 20,
         ),
         Text(
           "Hari-$hari",
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 30,
         ),
       ],

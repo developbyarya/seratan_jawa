@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_typing_uninitialized_variables
+
 import 'package:flutter/material.dart';
 
 class TextAksara extends StatelessWidget {
@@ -5,7 +7,7 @@ class TextAksara extends StatelessWidget {
   final size;
   final color;
 
-  TextAksara(this.aksara,
+  const TextAksara(this.aksara,
       {double? this.size = 20, Color? this.color = Colors.white, Key? key})
       : super(key: key);
 

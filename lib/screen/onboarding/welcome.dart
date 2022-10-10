@@ -6,7 +6,7 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color(0xfffefefe),
+      color: const Color(0xfffefefe),
       height: double.infinity,
       width: double.infinity,
       child: Stack(children: [

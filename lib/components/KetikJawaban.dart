@@ -5,7 +5,6 @@ import 'package:v1/controller/Utama/Utama.dart';
 import 'package:v1/controller/components/KetikJawaban.dart';
 import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 import '../constant/Color.dart';
-import 'Aksara.dart';
 
 class KetikJawaban extends StatelessWidget {
   final PageController pageController;
@@ -28,14 +27,15 @@ class KetikJawaban extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
               child: Column(
                 children: [
                   Container(
                     width: 250,
                     height: 220,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                      borderRadius:
+                          const BorderRadius.all(const Radius.circular(20)),
                       color: ColorsConstant.primary,
                     ),
                     child: Align(
@@ -56,7 +56,7 @@ class KetikJawaban extends StatelessWidget {
                     "Bunyi karakter di atas adalah...",
                     style: TextStyle(fontSize: 18),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 25,
                   ),
                   TextField(
@@ -68,19 +68,19 @@ class KetikJawaban extends StatelessWidget {
                       }
                       _selfController.setJawaban(e.trim().toLowerCase());
                     },
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: "Ketik jawaban anda",
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8))),
                     ),
-                    scrollPadding: EdgeInsets.all(40),
+                    scrollPadding: const EdgeInsets.all(40),
                   ),
                 ],
               ),
             ),
             Obx(() => Container(
                   width: double.infinity,
-                  padding: EdgeInsets.only(top: 30),
+                  padding: const EdgeInsets.only(top: 30),
                   color: _controller.allowNext.value
                       ? ColorsConstant.primaryShade
                       : Colors.transparent,
@@ -106,15 +106,15 @@ class KetikJawaban extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              shape: StadiumBorder(),
+                              shape: const StadiumBorder(),
                               primary: _controller.isAnswered.value
                                   ? ColorsConstant.primary
                                   : ColorsConstant.primaryInactive,
-                              padding: EdgeInsets.symmetric(vertical: 15),
-                              minimumSize: Size(double.infinity, 50)),
+                              padding: const EdgeInsets.symmetric(vertical: 15),
+                              minimumSize: const Size(double.infinity, 50)),
                           child: Text(_controller.allowNext.value
                               ? (_controller.isLast.value
                                   ? "selesai"
@@ -131,7 +131,7 @@ class KetikJawaban extends StatelessWidget {
                               _controller.increment();
                               _controller.resetAnswer();
                               pageController.nextPage(
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   curve: Curves.ease);
                             } else {
                               if (kunci.toString().trim().toLowerCase() ==

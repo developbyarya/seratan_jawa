@@ -41,10 +41,10 @@ class Home extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              margin: EdgeInsets.only(top: 40, left: 10),
+              margin: const EdgeInsets.only(top: 40, left: 10),
               child: Text(
                 "Sugeng, ${getSapaan()}\n",
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                 ),
@@ -56,12 +56,12 @@ class Home extends StatelessWidget {
                 builder: (context, snapshot) {
                   switch (snapshot.data) {
                     case ConnectivityResult.none:
-                      return Text("No Internet Connection!");
+                      print("none");
+                      return const Text("No Internet Connection!");
                     case ConnectivityResult.wifi:
                     case ConnectivityResult.mobile:
-                      return ProgramHari(soal: soal);
                     default:
-                      return Text("No Internet Connection!");
+                      return ProgramHari(soal: soal);
                   }
                 }),
           ],
@@ -90,14 +90,13 @@ class ProgramHari extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             return Expanded(
               child: ListView(children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 ...snapshot.data!.docs.map((e) {
                   Map<String, dynamic> data = e.data() as Map<String, dynamic>;
                   return Hari(
                       hari: data["ke"],
-                      progrss: 0,
                       totalBagian: data["chapter"],
                       id: e.id,
                       bagianDesc: data["deskripsi"]);

@@ -34,9 +34,4 @@ class UtamaController extends GetxController {
       return ColorsConstant.border;
     }
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
 }

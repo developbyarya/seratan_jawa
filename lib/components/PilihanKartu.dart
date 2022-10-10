@@ -17,8 +17,8 @@ class PilihanKartu extends StatelessWidget {
       {Key? key, this.massage})
       : super(key: key);
 
-  var _controller = Get.find<UtamaController>();
-  var _selfController = Get.put(PilihanController());
+  final _controller = Get.find<UtamaController>();
+  final _selfController = Get.put(PilihanController());
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class PilihanKartu extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(top: 60, left: 20, right: 20),
+          padding: const EdgeInsets.only(top: 60, left: 20, right: 20),
           child: Column(children: [
             Container(
               width: 250,
@@ -40,11 +40,11 @@ class PilihanKartu extends StatelessWidget {
                 ],
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
                 color: ColorsConstant.primary,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Row(
@@ -58,7 +58,7 @@ class PilihanKartu extends StatelessWidget {
                     child: Obx(() => Container(
                         child: Text(
                           opsi,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 42,
                             color: Colors.black,
                           ),
@@ -70,7 +70,7 @@ class PilihanKartu extends StatelessWidget {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                                offset: Offset(0, 4),
+                                offset: const Offset(0, 4),
                                 blurRadius: 4,
                                 color: ColorsConstant.shadow)
                           ],
@@ -92,7 +92,7 @@ class PilihanKartu extends StatelessWidget {
         ),
         Obx(() => Container(
               width: double.infinity,
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               color: _controller.allowNext.value
                   ? ColorsConstant.primaryShade
                   : Colors.transparent,
@@ -132,15 +132,15 @@ class PilihanKartu extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
+                          shape: const StadiumBorder(),
                           primary: _controller.isAnswered.value
                               ? ColorsConstant.primary
                               : ColorsConstant.primaryInactive,
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          minimumSize: Size(double.infinity, 50)),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          minimumSize: const Size(double.infinity, 50)),
                       child: Text(_controller.allowNext.value
                           ? (_controller.isLast.value ? "selesai" : "Lanjut")
                           : "check"),
@@ -155,12 +155,13 @@ class PilihanKartu extends StatelessWidget {
                           _controller.increment();
                           _controller.resetAnswer();
                           pageController.nextPage(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.ease);
                         } else {
                           _controller.allowNext.value = true;
-                          if (_selfController.pilihan.value == option[kunci])
+                          if (_selfController.pilihan.value == option[kunci]) {
                             _controller.setCorrect();
+                          }
                         }
                       },
                     ),

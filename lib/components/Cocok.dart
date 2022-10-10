@@ -17,8 +17,8 @@ class Cocok extends StatelessWidget {
       {Key? key, this.massage})
       : super(key: key);
 
-  var _controller = Get.find<UtamaController>();
-  var _selfController = Get.put(CocokController());
+  final _controller = Get.find<UtamaController>();
+  final _selfController = Get.put(CocokController());
 
   @override
   Widget build(BuildContext context) {
@@ -59,7 +59,7 @@ class Cocok extends StatelessWidget {
                           }
                         },
                         child: Obx(() => Container(
-                            margin: EdgeInsets.symmetric(vertical: 10),
+                            margin: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
                               e,
                               style: TextStyle(
@@ -76,7 +76,7 @@ class Cocok extends StatelessWidget {
                               color: Colors.white,
                               boxShadow: [
                                 BoxShadow(
-                                    offset: Offset(0, 4),
+                                    offset: const Offset(0, 4),
                                     blurRadius: 4,
                                     color: ColorsConstant.shadow)
                               ],
@@ -106,7 +106,8 @@ class Cocok extends StatelessWidget {
                                         : Colors.black,
                                     size: 24,
                                   ),
-                                  margin: EdgeInsets.symmetric(vertical: 10),
+                                  margin:
+                                      const EdgeInsets.symmetric(vertical: 10),
                                   alignment: Alignment.center,
                                   width: 160,
                                   height: 80,
@@ -114,7 +115,7 @@ class Cocok extends StatelessWidget {
                                     color: Colors.white,
                                     boxShadow: [
                                       BoxShadow(
-                                          offset: Offset(0, 4),
+                                          offset: const Offset(0, 4),
                                           blurRadius: 4,
                                           color: ColorsConstant.shadow)
                                     ],
@@ -161,7 +162,7 @@ class Cocok extends StatelessWidget {
                 child: Expanded(
                   child: Container(
                     width: double.infinity,
-                    padding: EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 30),
                     child: Container(
                       color: _controller.allowNext.value
                           ? ColorsConstant.primaryShade
@@ -191,16 +192,17 @@ class Cocok extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: EdgeInsets.all(10),
+                            padding: const EdgeInsets.all(10),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
-                                  shape: StadiumBorder(),
+                                  shape: const StadiumBorder(),
                                   primary: _selfController.correct.length ==
                                           kunci.length
                                       ? ColorsConstant.primary
                                       : ColorsConstant.primaryInactive,
-                                  padding: EdgeInsets.symmetric(vertical: 15),
-                                  minimumSize: Size(double.infinity, 50)),
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 15),
+                                  minimumSize: const Size(double.infinity, 50)),
                               child: Text(
                                   _selfController.correct.length == kunci.length
                                       ? (_controller.isLast.value
@@ -219,7 +221,8 @@ class Cocok extends StatelessWidget {
                                   _controller.increment();
                                   _controller.resetAnswer();
                                   pageController.nextPage(
-                                      duration: Duration(milliseconds: 500),
+                                      duration:
+                                          const Duration(milliseconds: 500),
                                       curve: Curves.ease);
                                 } else {
                                   return;

@@ -48,25 +48,25 @@ class Multiaksara extends StatelessWidget {
                                 _controller.setAnswered();
                               },
                               child: Obx(() => Container(
-                                    margin: EdgeInsets.only(bottom: 10),
+                                    margin: const EdgeInsets.only(bottom: 10),
                                     width: double.infinity,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 20, vertical: 15),
                                       child: Text(
                                         e,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 16,
                                         ),
                                       ),
                                     ),
                                     decoration: BoxDecoration(
                                       color: Colors.white,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(8)),
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(8)),
                                       boxShadow: [
                                         BoxShadow(
-                                            offset: Offset(0, 4),
+                                            offset: const Offset(0, 4),
                                             blurRadius: 4,
                                             color: ColorsConstant.shadow)
                                       ],
@@ -93,7 +93,7 @@ class Multiaksara extends StatelessWidget {
         ),
         Obx(() => Container(
               width: double.infinity,
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               color: _controller.allowNext.value
                   ? ColorsConstant.primaryShade
                   : Colors.transparent,
@@ -132,15 +132,15 @@ class Multiaksara extends StatelessWidget {
                         ]),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
+                          shape: const StadiumBorder(),
                           primary: _controller.isAnswered.value
                               ? ColorsConstant.primary
                               : ColorsConstant.primaryInactive,
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          minimumSize: Size(double.infinity, 50)),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          minimumSize: const Size(double.infinity, 50)),
                       child: Text(_controller.allowNext.value
                           ? (_controller.isLast.value ? "selesai" : "Lanjut")
                           : "check"),
@@ -155,12 +155,13 @@ class Multiaksara extends StatelessWidget {
                           _controller.increment();
                           _controller.resetAnswer();
                           pageController.nextPage(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.ease);
                         } else {
                           _controller.allowNext.value = true;
-                          if (_selfController.choice.value == kunci)
+                          if (_selfController.choice.value == kunci) {
                             _controller.setCorrect();
+                          }
                         }
                       },
                     ),

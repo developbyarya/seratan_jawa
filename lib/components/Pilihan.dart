@@ -15,8 +15,8 @@ class Pilihan extends StatelessWidget {
   Pilihan(this.pertanyaan, this.kunci, this.option, this.pageController,
       {Key? key, this.massage})
       : super(key: key);
-  var _controller = Get.find<UtamaController>();
-  var _selfController = Get.put(PilihanController());
+  final _controller = Get.find<UtamaController>();
+  final _selfController = Get.put(PilihanController());
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class Pilihan extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Padding(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 120),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 120),
           child: Column(children: [
             Text(
               pertanyaan,
@@ -56,7 +56,7 @@ class Pilihan extends StatelessWidget {
                           color: Colors.white,
                           boxShadow: [
                             BoxShadow(
-                                offset: Offset(0, 4),
+                                offset: const Offset(0, 4),
                                 blurRadius: 4,
                                 color: ColorsConstant.shadow)
                           ],
@@ -78,7 +78,7 @@ class Pilihan extends StatelessWidget {
         ),
         Obx(() => Container(
               width: double.infinity,
-              padding: EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 30),
               color: _controller.allowNext.value
                   ? ColorsConstant.primaryShade
                   : Colors.transparent,
@@ -117,15 +117,15 @@ class Pilihan extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(10),
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
+                          shape: const StadiumBorder(),
                           primary: _controller.isAnswered.value
                               ? ColorsConstant.primary
                               : ColorsConstant.primaryInactive,
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          minimumSize: Size(double.infinity, 50)),
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          minimumSize: const Size(double.infinity, 50)),
                       child: Text(_controller.allowNext.value
                           ? (_controller.isLast.value ? "selesai" : "Lanjut")
                           : "check"),
@@ -140,12 +140,13 @@ class Pilihan extends StatelessWidget {
                           _controller.increment();
                           _controller.resetAnswer();
                           pageController.nextPage(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               curve: Curves.ease);
                         } else {
                           _controller.allowNext.value = true;
-                          if (_selfController.pilihan.value == option[kunci])
+                          if (_selfController.pilihan.value == option[kunci]) {
                             _controller.setCorrect();
+                          }
                         }
                       },
                     ),

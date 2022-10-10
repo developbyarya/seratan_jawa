@@ -9,9 +9,9 @@ class Materi extends StatelessWidget {
   final String latin;
   final PageController pageController;
   Materi(
-      {required String this.aksara,
-      required String this.latin,
-      required PageController this.pageController,
+      {required this.aksara,
+      required this.latin,
+      required this.pageController,
       Key? key})
       : super(key: key);
 
@@ -28,7 +28,7 @@ class Materi extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(top: 130),
+      padding: const EdgeInsets.only(top: 130),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -51,7 +51,8 @@ class Materi extends StatelessWidget {
                     child: Align(
                       child: Text(
                         latin,
-                        style: TextStyle(color: Colors.white, fontSize: 40),
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 40),
                       ),
                       alignment: Alignment.bottomRight,
                     ),
@@ -59,7 +60,7 @@ class Materi extends StatelessWidget {
                 ],
               ),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
+                borderRadius: const BorderRadius.all(const Radius.circular(15)),
                 color: ColorsConstant.primary,
               ),
             ),
@@ -68,13 +69,13 @@ class Materi extends StatelessWidget {
             width: double.infinity,
             alignment: Alignment.center,
             child: Padding(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    shape: StadiumBorder(),
+                    shape: const StadiumBorder(),
                     primary: ColorsConstant.primary,
-                    padding: EdgeInsets.symmetric(vertical: 15),
-                    minimumSize: Size(double.infinity, 50)),
+                    padding: const EdgeInsets.symmetric(vertical: 15),
+                    minimumSize: const Size(double.infinity, 50)),
                 child: Obx(() =>
                     Text(_controller.isLast.value ? "selesai" : "Lanjut")),
                 onPressed: () {
@@ -86,7 +87,7 @@ class Materi extends StatelessWidget {
                   _controller.increment();
                   _controller.resetAnswer();
                   pageController.nextPage(
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.ease);
                 },
               ),

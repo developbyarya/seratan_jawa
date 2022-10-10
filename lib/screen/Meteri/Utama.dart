@@ -7,9 +7,7 @@ import 'package:v1/components/MateriText.dart';
 import 'package:v1/components/Multiaksara.dart';
 import 'package:v1/components/Pilihan.dart';
 import 'package:v1/components/Latin.dart';
-import 'package:v1/constant/Color.dart';
 import 'package:v1/controller/Utama/Utama.dart';
-import 'package:v1/screen/Meteri/Bagian.dart';
 import 'package:get/get.dart';
 
 import '../../components/PilihanKartu.dart';
@@ -40,7 +38,7 @@ class Utama extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data!.docs.length == 0) {
-              return Scaffold(
+              return const Scaffold(
                 body: SafeArea(
                     child: Text("Terjadi Error, periksa koneksi anda!")),
               );
@@ -48,11 +46,11 @@ class Utama extends StatelessWidget {
             PageController pageController = PageController();
             var appBar2 = AppBar(
               centerTitle: true,
-              leading: CloseButton(color: Colors.black),
+              leading: const CloseButton(color: Colors.black),
               backgroundColor: Colors.transparent,
               elevation: 0,
               title: Obx(() => ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(9999)),
+                    borderRadius: const BorderRadius.all(Radius.circular(9999)),
                     child: LinearProgressIndicator(
                       value: _controller.progress / snapshot.data!.docs.length,
                       minHeight: 15,
@@ -62,10 +60,10 @@ class Utama extends StatelessWidget {
                 Container(
                   child: Obx(() => Text(
                         "${_controller.progress}/${snapshot.data!.docs.length}",
-                        style: TextStyle(color: Colors.black),
+                        style: const TextStyle(color: Colors.black),
                       )),
                   alignment: Alignment.center,
-                  margin: EdgeInsets.only(right: 15),
+                  margin: const EdgeInsets.only(right: 15),
                 )
               ],
             );
@@ -75,12 +73,10 @@ class Utama extends StatelessWidget {
                 controller: pageController,
                 onPageChanged: (index) {
                   if (index + 1 == snapshot.data!.docs.length) {
-                    print("yeay terakhir");
                     _controller.setLastPage();
                   }
                 },
                 children: snapshot.data!.docs.map((e) {
-                  print("disini woy");
                   Map<String, dynamic> soalResult =
                       e.data() as Map<String, dynamic>;
 
@@ -139,19 +135,18 @@ class Utama extends StatelessWidget {
                         soalResult["data"]["text"], pageController);
                   }
 
-                  return Text("Apalah gitu");
+                  return const Text("Apalah gitu");
                 }).toList(),
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
               ),
             );
           }
 
-          return Scaffold(body: Center(child: CircularProgressIndicator()));
+          return const Scaffold(
+              body: Center(child: CircularProgressIndicator()));
         });
   }
 
   @override
-  void dispose() {
-    print("Element Removed");
-  }
+  void dispose() {}
 }
