@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:v1/screen/Meteri/Bagian.dart';
 import 'package:v1/utils/lib/storeage_control/user_progress.dart';
 
-class Hari extends StatelessWidget {
+class Hari extends StatefulWidget {
   final String hari;
   final int totalBagian;
   final String bagianDesc;
@@ -18,17 +18,25 @@ class Hari extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<Hari> createState() => _HariState();
+}
+
+class _HariState extends State<Hari> {
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         InkWell(
           onTap: () {
-            Get.to(Bagian(id, hari, bagianDesc, totalBagian));
+            Get.to(Bagian(widget.id, widget.hari, widget.bagianDesc,
+                    widget.totalBagian))!
+                .then((value) => setState(() {}));
           },
           child: Stack(
             children: [
               FutureBuilder<double>(
-                  future: UserProgress.getAllProgress(id, totalBagian),
+                  future: UserProgress.getAllProgress(
+                      widget.id, widget.totalBagian),
                   builder: (context, snapshot) {
                     return Center(
                       child: SizedBox(
@@ -48,7 +56,7 @@ class Hari extends StatelessWidget {
                 alignment: Alignment.center,
                 height: 100,
                 child: Text(
-                  hari,
+                  widget.hari,
                   style: TextStyle(
                       color: ColorsConstant.primary,
                       fontWeight: FontWeight.bold,
@@ -72,7 +80,7 @@ class Hari extends StatelessWidget {
           height: 20,
         ),
         Text(
-          "Hari-$hari",
+          "Hari-${widget.hari}",
           style: const TextStyle(
             fontSize: 18,
           ),
